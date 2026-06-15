@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tobi - Tools</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/jpeg" href="Tools.jpeg">
+
+    <link rel="apple-touch-icon" href="Tools.jpeg">
+    <link rel="apple-touch-icon" sizes="152x152" href="Tools.jpeg">
+    <link rel="apple-touch-icon" sizes="180x180" href="Tools.jpeg">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Tobi Tools">
+
+    <style>
+        html {
+            background-color: #000000;    /* Reines, edles Schwarz als Basis */
+        }
+
+        /* CSS VARIABLEN FÜR EINFACHE ANPASSUNGEN */
+        :root {
+            --bg-color: transparent;      /* Transparent, damit der Hintergrund durchscheint */
+            --text-color: #ffffff;
+            
+            /* Farbschema für Verläufe: Lila -> Pink -> Rot */
+            --color-purple: #a855f7;     /* Lila */
+            --color-pink: #ec4899;       /* Pink */
+            --color-red: #ef4444;        /* Rot */
+        }
+
+        /* STRUKTUR & BACKDROP */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent; /* Verhindert blauen Kasten beim Tippen auf Handys */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* HINTERGRUND-CONTAINER FÜR ANIMIERTE BLOBS (KI-Style wie bei Gemini) */
+        .glow-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            z-index: -1; /* Auf Ebene -1 setzen (hinter allen Inhalten), verhindert Klick-Blockierung */
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        /* Die wabernden Licht-Blobs (Hardware-beschleunigt mit transform) */
+        .blob {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            filter: blur(100px);
+            opacity: 0.22; /* Höhere Opazität für deutlichere Sichtbarkeit */
+            pointer-events: none;
+        }
+
+        .blob-purple {
+            background-color: var(--color-purple);
+            top: -10%;
+            left: -10%;
+            animation: move-purple 15s infinite alternate ease-in-out; /* Schnellere Animation (15s statt 22s) */
+        }
+
+        .blob-pink {
+            background-color: var(--color-pink);
+            bottom: -10%;
+            right: -10%;
+            animation: move-pink 12s infinite alternate ease-in-out; /* Schnellere Animation (12s statt 18s) */
+        }
+
+        .blob-red {
+            background-color: var(--color-red);
+            top: 35%;
+            left: 20%;
+            animation: move-red 18s infinite alternate ease-in-out; /* Schnellere Animation (18s statt 25s) */
+        }
+
+        /* Wabernde Bewegungs-Animationen (größere Bewegungsradien) */
+        @keyframes move-purple {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(120px, 80px, 0) scale(1.2); }
+            100% { transform: translate3d(-60px, 150px, 0) scale(0.95); }
+        }
+
+        @keyframes move-pink {
+            0% { transform: translate3d(0, 0, 0) scale(0.9); }
+            50% { transform: translate3d(-150px, -90px, 0) scale(1.25); }
+            100% { transform: translate3d(80px, 60px, 0) scale(1.1); }
+        }
+
+        @keyframes move-red {
+            0% { transform: translate3d(0, 0, 0) scale(1.1); }
+            50% { transform: translate3d(-80px, 120px, 0) scale(0.85); }
+            100% { transform: translate3d(90px, -100px, 0) scale(1.2); }
+        }
+
+        /* CONTAINER FÜR MOBILE OPTIMIERUNG */
+        .container {
+            width: 100%;
+            max-width: 400px; /* Perfekte Breite für alle Handys */
+            z-index: 2; /* Höher als der Hintergrund (.glow-bg = 0) */
+            position: relative; /* Erforderlich, damit z-index wirkt */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* HEADER / ÜBERSCHRIFT */
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            
+            /* Schöner Farbverlauf auf der Schrift */
+            background: linear-gradient(135deg, var(--color-purple), var(--color-pink), var(--color-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            
+            /* Subtiler Glow-Effekt für die Schrift */
+            text-shadow: 0 0 40px rgba(236, 72, 153, 0.2);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* BUTTON LISTE & ABSTÄNDE */
+        .button-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px; /* Abstand zwischen den Buttons */
+        }
+
+        /* BUTTON STYLING (Relativ klein & edel) */
+        .tool-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 16px;
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px; /* Abgerundete Ecken */
+            background: rgba(20, 18, 25, 0.8); /* Dunkler, leicht transparenter Hintergrund */
+            border: 1px solid transparent;
+            background-clip: padding-box;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                        box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        /* Styling für das App-Icon */
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: rgba(255, 255, 255, 0.1); /* Fallback-Hintergrund */
+        }
+
+        /* Farbverlauf als Rahmen über ein Pseudo-Element (für abgerundete Gradient-Rahmen) */
+        .tool-btn::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            z-index: -1;
+            border-radius: 12px;
+            /* Farbverlauf auf dem Rahmen */
+            background: linear-gradient(135deg, var(--color-purple), var(--color-pink), var(--color-red));
+            opacity: 0.4; /* Standardmäßig leicht gedimmt */
+            transition: opacity 0.2s ease;
+        }
+
+        /* AKTIV- & HOVER-STATI FÜR TOUCH/MAUS */
+        .tool-btn:hover::before,
+        .tool-btn:active::before {
+            opacity: 1; /* Farbverlauf leuchtet voll auf */
+        }
+
+        .tool-btn:hover,
+        .tool-btn:active {
+            transform: scale(1.02); /* Minimales Vergrößern beim Tippen/Hovern */
+            /* Glow-Effekt nach außen */
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.15);
+            background: rgba(30, 27, 38, 0.9); /* Macht den Hintergrund beim Tippen minimal heller */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-bg">
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-pink"></div>
+        <div class="blob blob-red"></div>
+    </div>
+
+    <div class="container">
+        
+        <header>
+            <h1>Tobi - Tools</h1>
+            <div class="subtitle">Übersicht</div>
+        </header>
+
+        <main class="button-list">
+            <a href="https://tobis-cloud.github.io/GrosserPreis/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+                <img src="GrosserPreis.png" alt="Großer Preis" class="btn-icon">
+                <span>Großer Preis</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/binokel/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+                <img src="Binokel.jpeg" alt="Binokel" class="btn-icon">
+                <span>Binokel</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/training/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+                <img src="Training.jpeg" alt="Training" class="btn-icon">
+                <span>Training</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/StilleZeit/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+                <img src="Stille.jpeg" alt="Stille Zeit" class="btn-icon">
+                <span>Stille Zeit</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/Top10/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+                <img src="Top10.jpeg" alt="Top 10" class="btn-icon">
+                <span>Top 10</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/kniffel/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+                <img src="Kniffel.jpeg" alt="Kniffel" class="btn-icon">
+                <span>Kniffel</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/GluecksRad/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+                <img src="Rad.jpeg" alt="Glücksrad" class="btn-icon">
+                <span>Glücksrad</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/AufDeinWort/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+                <img src="AufDeinWort.jpeg" alt="Auf dein Wort" class="btn-icon">
+                <span>Auf dein Wort</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/Gewicht1/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+                <img src="Gewicht.jpeg" alt="Gewicht" class="btn-icon">
+                <span>Gewichtstracker</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/MorgenNews/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+                <img src="MorgenNews.jpeg" alt="Morgen News" class="btn-icon">
+                <span>Morgen News</span>
+            </a>
+        </main>
+
+    </div>
+
+</body>
+</html>
