@@ -180,9 +180,6 @@
             gap: 16px;
             width: 100%;
             padding: 12px 16px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #ffffff;
             text-decoration: none;
             border-radius: 12px; /* Abgerundete Ecken */
             background: rgba(20, 18, 25, 0.8); /* Dunkler, leicht transparenter Hintergrund */
@@ -191,6 +188,33 @@
             transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
                         box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
+        }
+
+        /* Text-Container innerhalb des Buttons */
+        .btn-text-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            text-align: left;
+        }
+
+        .btn-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        /* Styling für die optionale Beschreibung */
+        .btn-desc {
+            font-size: 0.78rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.3;
+        }
+
+        /* Wenn die Beschreibung leer ist (nur HTML-Kommentare enthält), wird sie komplett ausgeblendet */
+        .btn-desc:empty {
+            display: none;
         }
 
         /* Styling für das App-Icon */
@@ -248,43 +272,73 @@
         <main class="button-list">
             <a href="https://tobis-cloud.github.io/GrosserPreis/" class="tool-btn" target="_blank" rel="noopener noreferrer">
                 <img src="GrosserPreis.png" alt="Großer Preis" class="btn-icon">
-                <span>Großer Preis</span>
+                <div class="btn-text-container">
+                    <span class="btn-title">Großer Preis</span>
+                    <span class="btn-desc"><!-- BESCHREIBUNG: Hier die Beschreibung eintragen --></span>
+                </div>
             </a>
             <a href="https://tobis-cloud.github.io/binokel/" class="tool-btn" target="_blank" rel="noopener noreferrer">
                 <img src="Binokel.jpeg" alt="Binokel" class="btn-icon">
-                <span>Binokel</span>
+                <div class="btn-text-container">
+                    <span class="btn-title">Binokel</span>
+                    <span class="btn-desc"><!-- BESCHREIBUNG: Hier die Beschreibung eintragen --></span>
+                </div>
             </a>
             <a href="https://tobis-cloud.github.io/training/" class="tool-btn" target="_blank" rel="noopener noreferrer">
                 <img src="Training.jpeg" alt="Training" class="btn-icon">
-                <span>Training</span>
+                <div class="btn-text-container">
+                    <span class="btn-title">Training</span>
+                    <span class="btn-desc"><!-- BESCHREIBUNG: Hier die Beschreibung eintragen --></span>
+                </div>
             </a>
             <a href="https://tobis-cloud.github.io/StilleZeit/" class="tool-btn" target="_blank" rel="noopener noreferrer">
                 <img src="Stille.jpeg" alt="Stille Zeit" class="btn-icon">
-                <span>Stille Zeit</span>
+                <div class="btn-text-container">
+                    <span class="btn-title">Stille Zeit</span>
+                    <span class="btn-desc"><!-- BESCHREIBUNG: Hier die Beschreibung eintragen --></span>
+                </div>
             </a>
             <a href="https://tobis-cloud.github.io/Top10/" class="tool-btn" target="_blank" rel="noopener noreferrer">
                 <img src="Top10.jpeg" alt="Top 10" class="btn-icon">
-                <span>Top 10</span>
+                <div class="btn-text-container">
+                    <span class="btn-title">Top 10</span>
+                    <span class="btn-desc"><!-- BESCHREIBUNG: Hier die Beschreibung eintragen --></span>
+                </div>
             </a>
             <a href="https://tobis-cloud.github.io/kniffel/" class="tool-btn" target="_blank" rel="noopener noreferrer">
                 <img src="Kniffel.jpeg" alt="Kniffel" class="btn-icon">
-                <span>Kniffel</span>
+                <div class="btn-text-container">
+                    <span class="btn-title">Kniffel</span>
+                    <span class="btn-desc"><!-- BESCHREIBUNG: Hier die Beschreibung eintragen --></span>
+                </div>
             </a>
             <a href="https://tobis-cloud.github.io/GluecksRad/" class="tool-btn" target="_blank" rel="noopener noreferrer">
                 <img src="Rad.jpeg" alt="Glücksrad" class="btn-icon">
-                <span>Glücksrad</span>
+                <div class="btn-text-container">
+                    <span class="btn-title">Glücksrad</span>
+                    <span class="btn-desc"><!-- BESCHREIBUNG: Hier die Beschreibung eintragen --></span>
+                </div>
             </a>
             <a href="https://tobis-cloud.github.io/AufDeinWort/" class="tool-btn" target="_blank" rel="noopener noreferrer">
                 <img src="AufDeinWort.jpeg" alt="Auf dein Wort" class="btn-icon">
-                <span>Auf dein Wort</span>
+                <div class="btn-text-container">
+                    <span class="btn-title">Auf dein Wort</span>
+                    <span class="btn-desc"><!-- BESCHREIBUNG: Hier die Beschreibung eintragen --></span>
+                </div>
             </a>
-            <a href="https://tobis-cloud.github.io/Gewicht1/" class="tool-btn" target="_blank" rel="noopener noreferrer">
+            <a href="https://tobis-cloud.github.io/Gewicht/" class="tool-btn" target="_blank" rel="noopener noreferrer">
                 <img src="Gewicht.jpeg" alt="Gewicht" class="btn-icon">
-                <span>Gewichtstracker</span>
+                <div class="btn-text-container">
+                    <span class="btn-title">Gewichtstracker</span>
+                    <span class="btn-desc"><!-- BESCHREIBUNG: Hier die Beschreibung eintragen --></span>
+                </div>
             </a>
             <a href="https://tobis-cloud.github.io/MorgenNews/" class="tool-btn" target="_blank" rel="noopener noreferrer">
                 <img src="MorgenNews.jpeg" alt="Morgen News" class="btn-icon">
-                <span>Morgen News</span>
+                <div class="btn-text-container">
+                    <span class="btn-title">Morgen News</span>
+                    <span class="btn-desc"><!-- BESCHREIBUNG: Hier die Beschreibung eintragen --></span>
+                </div>
             </a>
         </main>
 
